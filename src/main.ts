@@ -1,20 +1,38 @@
-import p5 from 'p5';
+import p5 from "p5"
 
-import './style.css';
+import { Object } from "./utils/class"
+
+import "./style.css"
+
+let objects: Object[] = []
 
 const _app = new p5(p5Instance => {
-  const p = p5Instance as unknown as p5;
+  const p = p5Instance as unknown as p5
 
-  const x = 100;
-  const y = 100;
+  const height = 500
+  const width = 500
 
+  // Setup
   p.setup = function setup() {
-    p.createCanvas(500, 500);
-  };
+    p.createCanvas(height, width)
+    p.background(200)
 
+    objects.push(
+      Object.createObject(p.createVector(100, 100), 1, p.createVector(0, 0), p.createVector(0, 0)),
+      Object.createObject(p.createVector(width / 2, height / 2), 20, p.createVector(0, 0), p.createVector(0, 0))
+    )
+  }
+
+  // Main loop
   p.draw = function draw() {
-    p.background(0);
-    p.fill(205);
-    p.rect(x, y, 50, 50);
-  };
-}, document.getElementById('app')!);
+    for (let i of objects) {
+      i.draw(p, true)
+    }
+  }
+
+
+
+
+
+
+}, document.getElementById("app")!)
