@@ -1,10 +1,9 @@
 import p5 from "p5"
-
-import { Object } from "./utils/class"
+import { Entity } from "./utils/entity"
 
 import "./style.css"
 
-let objects: Object[] = []
+let entitys: Entity[] = []
 let debug = true
 
 const _app = new p5(p5Instance => {
@@ -16,21 +15,21 @@ const _app = new p5(p5Instance => {
   // Setup
   p.setup = function setup() {
     p.createCanvas(width, height)
-    objects.push(
-      Object.createObject(p.createVector(width / 2, height / 2 - 200), 20, p.createVector(5, 0), p.createVector(0, 0)),
-      Object.createObject(p.createVector(width / 2, height / 2), 100, p.createVector(0, 0), p.createVector(0, 0))
+    entitys.push(
+      Entity.createEntity(p.createVector(width / 2, height / 2 - 200), 20, p.createVector(5, 0), p.createVector(0, 0)),
+      Entity.createEntity(p.createVector(width / 2, height / 2), 100, p.createVector(0, 0), p.createVector(0, 0))
     )
     if (debug) {
-      console.log(objects)
+      console.log(entitys)
     }
   }
 
   // Main loop
   p.draw = function draw() {
     p.background(200)
-    objects.forEach(object => { 
-      object.draw(p, debug)
-      object.update(p, objects)
+    entitys.forEach(entity => { 
+      entity.draw(p, debug)
+      entity.update(p, entitys)
     })
   }
 

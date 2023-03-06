@@ -7,7 +7,7 @@ const debugArrowScale = 20
 
 let idIncrement = 0
 
-export class Object {
+export class Entity {
   constructor(
     public id: number,
     public mass: number,
@@ -24,18 +24,18 @@ export class Object {
     this.acceleration = acceleration
   }
 
-  public static createObject(position: p5.Vector, mass: number, velocity: p5.Vector, acceleration: p5.Vector) {
-    return new Object(idIncrement++, mass, position, velocity, acceleration)
+  public static createEntity(position: p5.Vector, mass: number, velocity: p5.Vector, acceleration: p5.Vector) {
+    return new Entity(idIncrement++, mass, position, velocity, acceleration)
   }
 
-  public update(p: p5, objectList: Object[]) {
+  public update(p: p5, entityList: Entity[]) {
     this.forces = []
     this.netForce = new p5.Vector()
-    objectList.forEach(object => {
-      if (object.id !== this.id) {
-        const distance = p5.Vector.sub(object.position, this.position)
+    entityList.forEach(entity => {
+      if (entity.id !== this.id) {
+        const distance = p5.Vector.sub(entity.position, this.position)
         // f = G * m1 * m2 / r^2
-        const forceMag = (object.mass * this.mass) / (distance.magSq())
+        const forceMag = (entity.mass * this.mass) / (distance.magSq())
         const force = new p5.Vector()
         this.forces.push(force)
       }
