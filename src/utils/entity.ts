@@ -28,29 +28,20 @@ export class Entity {
     return new Entity(idIncrement++, mass, position, velocity, acceleration)
   }
 
-  public update(p: p5, entityList: Entity[]) {
-    this.forces = []
-    this.netForce = new p5.Vector()
-    entityList.forEach(entity => {
-      if (entity.id !== this.id) {
-        const distance = p5.Vector.sub(entity.position, this.position)
-        // f = G * m1 * m2 / r^2
-        const forceMag = (entity.mass * this.mass) / (distance.magSq())
-        const force = new p5.Vector()
-        this.forces.push(force)
-      }
-      this.forces.forEach(force => {
-        this.netForce.add(force)
-      })
-    })
+  public update(p: p5, force: p5.Vector) {
+    // TODO:
+    // F -> A -> ΔV -> V -> ΔS -> S
   }
 
-  public draw(p: p5, debug: boolean = false) {
+  public draw(p: p5) {
     p.ellipse(this.position.x, this.position.y, this.mass * 1, this.mass * 1)
+  }
+
+  public drawDebug(p: p5, debug: boolean = false) { 
     if (debug) {
       drawArrow(p, this.position, this.velocity, p.color(0, 255, 0), debugArrowScale)
       drawArrow(p, this.position, this.acceleration, p.color(255, 0, 0), debugArrowScale)
-      drawArrow(p, this.position, this.netForce, p.color(0, 0, 255), debugArrowScale * 1000)
+      drawArrow(p, this.position, this.netForce, p.color(0, 0, 255), debugArrowScale)
     }
   }
   

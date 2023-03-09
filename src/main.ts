@@ -19,7 +19,8 @@ const _app = new p5(p5Instance => {
     p.createCanvas(width, height)
     entities.store = [
       Entity.createEntity(p.createVector(width / 2, height / 2), 100, p.createVector(0, 0), p.createVector(0, 0)),
-      Entity.createEntity(p.createVector(width / 2, height / 2 - 50), 20, p.createVector(5, 0), p.createVector(0, 0))
+      Entity.createEntity(p.createVector(width / 2, height / 2 - 50), 20, p.createVector(5, 0), p.createVector(0, 0)),
+      Entity.createEntity(p.createVector(width / 2, height / 2 + 50), 20, p.createVector(-5, 0), p.createVector(0, 0)),
     ]
     
   }
@@ -27,13 +28,15 @@ const _app = new p5(p5Instance => {
   // Main loop
   p.draw = function draw() {
     p.background(200)
-    entities.calcEntitiesForce()
-    entities.drawEntitiesForce()
-    entities.store.forEach(entity => {
-      entity.draw(p, debug)
-      entity.update(p, entities.store)
-    })
+    // Update
+    entities.update()
+    // Draw
+    entities.draw()
+    // Debug
     if (debug) {
+      entities.store.forEach(entity => {
+        entity.drawDebug(p, debug)
+      })
       console.log(entities)
     }
   }
