@@ -11,6 +11,13 @@ export class EntityManager {
         public result: p5.Vector[] = []
     ) {}
     
+    pairKeys(arr: any[], k: number, prefix: any[] = []): any[] {
+        if (k == 0) return [prefix];
+        return arr.flatMap((v, i) =>
+            this.pairKeys(arr.slice(i + 1) as [], k - 1, [...prefix, v])
+        );
+    }
+
     public static createEntityManager(p: p5, entities: [] = []) {
         return new EntityManager(p, entities)
     }
@@ -22,22 +29,9 @@ export class EntityManager {
     }
 
     public calcEntitiesForce() {
-        this.pairKey1 = []
-        this.pairKey2 = []
-        this.result = []
-        this.store.forEach((entity1: Entity) => {
-            this.store.forEach((entity2: Entity) => {
-                if (entity1.id !== entity2.id) {
-                    this.pairKey1.push(entity1.id)
-                    this.pairKey2.push(entity2.id)
-                    let vec = this.p.createVector(0, 0)
-                        .setMag((entity1.mass * entity2.mass) / (p5.Vector.sub(entity1.position, entity2.position).magSq()))
-                        .setHeading(p5.Vector.sub(entity1.position, entity2.position).heading())
-                    this.result.push(vec)
-                }
-            })
-        })
-        return this.result.length
+        let entities = this.store.map((entity: Entity) => entity.id)
+        console.log(this.pairKeys(entities, 2))
+
     }
     
     public drawEntitiesForce() {
