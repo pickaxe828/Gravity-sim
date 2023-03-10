@@ -1,7 +1,6 @@
 import p5 from "p5"
 
 export function drawArrow(p: p5, base: p5.Vector, vec: p5.Vector, color: p5.Color = p.color(0, 0, 0), scale: number = 1) {
-    vec = vec.copy().mult(scale);
     p.push();
     p.stroke(color);
     p.strokeWeight(3);

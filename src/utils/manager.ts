@@ -43,16 +43,21 @@ export class EntityManager {
     public updateEntitiesForce() {
         let entities = this.store.map((entity: Entity) => entity.id)
         let pairs = this.pairKeys(entities, 2) as number[][]
-        console.log(pairs)
         // Calculate the force between each pair of entities
         pairs.forEach((pair: number[]) => {
             let entity1 = this.store[pair[0]]
             let entity2 = this.store[pair[1]]
             // f = m1 * m2 (* multiplier) / r^2
             // G is replaced with multiplier
-            let force = entity1.position.copy().mult(entity2.position).div(entity1.position.dist(entity2.position) ** 2)
-            this.store[entity1.id].forces.push(force)
-            this.store[entity2.id].forces.push(force)
+            let force = (50 * entity1.mass * entity2.mass) / (entity1.position.copy().dist(entity2.position) ** 2)
+            console.log(entity1.position.angleBetween(entity2.position))
+            let forceVec1 = new p5.Vector()
+            let forceVec2 = new p5.Vector()
+            forceVec1 = forceVec1.setHeading(entity1.position.angleBetween(entity2.position)).setMag(force)
+            forceVec2 = forceVec2.setHeading(entity2.position.angleBetween(entity1.position)).setMag(force)
+            this.store[entity1.id].forces.push(forceVec1)
+            this.store[entity2.id].forces.push(forceVec2)
+            // TODO
         })
     }
     

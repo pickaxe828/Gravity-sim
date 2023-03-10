@@ -39,9 +39,13 @@ export class Entity {
 
   public drawDebug(p: p5, debug: boolean = false) { 
     if (debug) {
-      drawArrow(p, this.position, this.velocity, p.color(0, 255, 0), debugArrowScale)
-      drawArrow(p, this.position, this.acceleration, p.color(255, 0, 0), debugArrowScale)
-      drawArrow(p, this.position, this.netForce, p.color(0, 0, 255), debugArrowScale)
+      // drawArrow(p, this.position, this.velocity, p.color(0, 255, 0), debugArrowScale)
+      // drawArrow(p, this.position, this.acceleration, p.color(255, 0, 0), debugArrowScale)
+      // drawArrow(p, this.position, this.netForce, p.color(0, 0, 255), debugArrowScale)
+      this.forces.forEach((force: p5.Vector) => {
+        console.log([this.position, force])
+        drawArrow(p, this.position, force, p.color(0, 0, 0), debugArrowScale)
+      })
     }
   }
   
