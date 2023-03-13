@@ -8,7 +8,8 @@ export class EntityManager {
         public store: Entity[] = [],
         public pairKey1: number[] = [],
         public pairKey2: number[] = [],
-        public result: p5.Vector[] = []
+        public result: p5.Vector[] = [],
+        public G: number = 100
     ) {}
     
     /**
@@ -43,30 +44,23 @@ export class EntityManager {
     public updateEntitiesForce() {
         let entities = this.store.map((entity: Entity) => entity.id)
         let pairs = this.pairKeys(entities, 2) as number[][]
-        // Calculate the force between each pair of entities
+        // Loop through each pair of entities
         pairs.forEach((pair: number[]) => {
             let entity1 = this.store[pair[0]]
             let entity2 = this.store[pair[1]]
             // f = m1 * m2 (* multiplier) / r^2
-            // G is replaced with multiplier
-            let force = (50 * entity1.mass * entity2.mass) / (entity1.position.copy().dist(entity2.position) ** 2)
-            console.log(entity1.position.angleBetween(entity2.position))
-            let forceVec1 = new p5.Vector()
-            let forceVec2 = new p5.Vector()
-            forceVec1 = forceVec1.setHeading(entity1.position.angleBetween(entity2.position)).setMag(force)
-            forceVec2 = forceVec2.setHeading(entity2.position.angleBetween(entity1.position)).setMag(force)
+            // Calculate the force between each pair of entities
+            let force = (this.G * entity1.mass * entity2.mass) / (entity1.position.dist(entity2.position) ** 2)
+            let radian = this.p.atan2(entity1.position.y - entity2.position.y, entity1.position.x - entity2.position.x)
+            console.log(radian)
+            let forceVec1 = p5.Vector.fromAngle(radian - this.p.PI, force)
+            let forceVec2 = p5.Vector.fromAngle(radian , force)
             this.store[entity1.id].forces.push(forceVec1)
             this.store[entity2.id].forces.push(forceVec2)
-            // TODO
         })
-    }
-    
-    /** 
-     * This method is for debugging. Draws all the pulling forces. 
-     */
-    public drawEntitiesForce() {
-        this.result.forEach((force: p5.Vector, index: number) => {
-            drawArrow(this.p, this.store[this.pairKey1[index]].position, force, this.p.color(0, 0, 0), 1000)
+        // Loop through each entity to calculate the resultant force
+        this.store.forEach((entity: Entity) => {
+            entity.updateNetForce()
         })
     }
 
