@@ -9,7 +9,7 @@ export class EntityManager {
         public pairKey1: number[] = [],
         public pairKey2: number[] = [],
         public result: p5.Vector[] = [],
-        public G: number = 100
+        public G: number = 5
     ) {}
     
     /**
