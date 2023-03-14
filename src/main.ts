@@ -18,9 +18,9 @@ const _app = new p5(p5Instance => {
   p.setup = function setup() {
     p.createCanvas(width, height)
     entities.store = [
-      Entity.createEntity(p.createVector(width / 2, height / 2), 200, p.createVector(0, 0), p.createVector(0, 0)),
-      Entity.createEntity(p.createVector(width / 2, height / 2 - 160), 20, p.createVector(5, 0), p.createVector(0, 0)),
-      Entity.createEntity(p.createVector(width / 2 - 50, height / 2 + 160), 50, p.createVector(-5, 0), p.createVector(0, 0)),
+      Entity.createEntity(p, p.createVector(width / 2, height / 2), 200, p.createVector(0, 0), p.createVector(0, 0)),
+      Entity.createEntity(p, p.createVector(width / 2, height / 2 - 160), 20, p.createVector(5, 0), p.createVector(0, 0)),
+      Entity.createEntity(p, p.createVector(width / 2 - 50, height / 2 + 160), 50, p.createVector(-5, 0), p.createVector(0, 0)),
     ]
   }
   
