@@ -26,9 +26,15 @@ export class Entity {
     this.netForce = this.forces.reduce((a: p5.Vector, b: p5.Vector) => a.add(b), new p5.Vector())
   }
 
-  public updateCascadeF2S(p: p5) {
+  public updateCascadeF2S() {
     // F -> A -> ΔV -> V -> ΔS -> S
+    console.log(this.netForce.div(this.mass))
     this.acceleration = this.netForce.div(this.mass)
+  }
+
+  public update() {
+    this.updateNetForce()
+    this.updateCascadeF2S()
   }
 
   public draw(p: p5) {
@@ -39,11 +45,10 @@ export class Entity {
     if (debug) {
       // drawArrow(p, this.position, this.velocity, p.color(0, 255, 0), debugArrowScale)
       drawArrow(p, this.position, this.acceleration, p.color(255, 0, 0), debugArrowScale)
-      drawArrow(p, this.position, this.netForce, p.color(0, 0, 255), debugArrowScale)
-      this.forces.forEach((force: p5.Vector) => {
-        console.log([this.position, force])
-        drawArrow(p, this.position, force, p.color(0, 0, 0), debugArrowScale)
-      })
+      // drawArrow(p, this.position, this.netForce, p.color(0, 0, 255), debugArrowScale)
+      // this.forces.forEach((force: p5.Vector) => {
+      //   drawArrow(p, this.position, force, p.color(0, 0, 0), debugArrowScale)
+      // })
     }
   }
   

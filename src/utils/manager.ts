@@ -52,7 +52,6 @@ export class EntityManager {
             // Calculate the force between each pair of entities
             let force = (this.G * entity1.mass * entity2.mass) / (entity1.position.dist(entity2.position) ** 2)
             let radian = this.p.atan2(entity1.position.y - entity2.position.y, entity1.position.x - entity2.position.x)
-            console.log(radian)
             let forceVec1 = p5.Vector.fromAngle(radian - this.p.PI, force)
             let forceVec2 = p5.Vector.fromAngle(radian , force)
             this.store[entity1.id].forces.push(forceVec1)
@@ -60,7 +59,7 @@ export class EntityManager {
         })
         // Loop through each entity to calculate the resultant force
         this.store.forEach((entity: Entity) => {
-            entity.updateNetForce()
+            entity.update()
         })
     }
 

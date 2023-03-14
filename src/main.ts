@@ -36,7 +36,6 @@ const _app = new p5(p5Instance => {
       entities.store.forEach(entity => {
         entity.drawDebug(p, debug)
       })
-      console.log(entities)
     }
   }
 
