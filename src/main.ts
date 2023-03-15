@@ -38,10 +38,4 @@ const _app = new p5(p5Instance => {
       })
     }
   }
-
-
-
-
-
-
-}, document.getElementById("app")!)
+}, document.getElementById("canva")!)
