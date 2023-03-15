@@ -22,7 +22,7 @@ export class EntityManager {
         return new EntityManager(p, entities)
     }
 
-    pairKeys(arr: any[], k: number, prefix: any[][] = []): any[][] {
+    public pairKeys(arr: any[], k: number, prefix: any[][] = []): any[][] {
         if (k == 0) return [prefix];
         return arr.flatMap((v, i) =>
             this.pairKeys(arr.slice(i + 1) as [], k - 1, [...prefix, v])
@@ -71,7 +71,7 @@ export class EntityManager {
 
     public draw() {
         this.store.forEach((entity: Entity) => {
-            entity.draw(this.p)
+            entity.draw()
         })
     }
 }

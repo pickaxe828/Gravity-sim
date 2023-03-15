@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 html,
-body, 
-canvas,
-#canva {
+body,
+.app,
+.canva {
   margin: 0;
   padding: 0;
   width: 100%;
