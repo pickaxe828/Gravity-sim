@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.3",
+    "bootstrap": "5.3.0-alpha1",
     "p5": "^1.6.0",
     "random": "^4.1.0"
   }

@@ -1,6 +1,3 @@
-// Import our custom CSS
-import './styles.scss'
-
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
 
@@ -34,7 +31,7 @@ const _app = new p5(p5Instance => {
   
   // Main loop
   p.draw = function draw() {
-    p.background(200)
+    p.background("#212529")
     // Update
     entities.update()
     // Draw

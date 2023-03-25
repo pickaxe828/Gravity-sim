@@ -90,7 +90,7 @@ export class Entity {
   public drawDebug(p: p5, debug: boolean = false, debugText: boolean = false) { 
     if (debug) {
       this.forces.forEach((force: p5.Vector) => {
-        drawArrow(p, this.position, force, p.color(100, 100, 100), debugArrowScale * 10)
+        drawArrow(p, this.position, force, p.color(100, 100, 100), debugArrowScale)
       })
       drawArrow(p, this.position, this.netForce, p.color(0, 0, 255), debugArrowScale)
       drawArrow(p, this.position, this.acceleration, p.color(255, 0, 0), debugArrowScale)

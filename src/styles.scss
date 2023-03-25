@@ -12,7 +12,7 @@ body,
   height: 100%;
   overflow: hidden;
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  background: #f1f1f1;
+  background: var(--bs-secondary-bg);
 }
 
 button {
@@ -20,6 +20,6 @@ button {
 }
 
 .pause-panel {
-  background-color: var(--bs-secondary-bg);
+  border-top: 2px solid var(--bs-border-color);
 
 }
