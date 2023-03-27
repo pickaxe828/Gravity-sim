@@ -69,6 +69,12 @@ export class EntityManager {
         this.updateEntitiesForce()
     }
 
+    public updateEditing() {
+        this.store.forEach(entity => {
+            entity.updateEditing()
+        })
+    }
+
     public draw() {
         this.store.forEach((entity: Entity) => {
             entity.draw()

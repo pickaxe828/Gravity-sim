@@ -64,14 +64,18 @@ export class Entity {
     this.updatePositionHistory()
   }
 
+  public updateEditing() {
+    this.dragUpdate()
+  }
+
   public draw() {
     this.drawTrail()
-    this.p.ellipse(this.position.x, this.position.y, Math.log10(this.mass) * 50, Math.log10(this.mass) * 50)
+    this.p.ellipse(this.position.x, this.position.y, this.mass, this.mass)
   }
   
   public dragUpdate() {
     //check if mouse is over the ellipse
-    if (this.p.mouseIsPressed && !this.dragging && this.p.dist(this.position.x, this.position.y, this.p.mouseX, this.p.mouseY) < Math.log10(this.mass) * 50 / 2) {
+    if (this.p.mouseIsPressed && !this.dragging && this.p.dist(this.position.x, this.position.y, this.p.mouseX, this.p.mouseY) < this.mass) {
       this.dragging = true
       this.dragOffset = {
         x: this.position.x - this.p.mouseX,

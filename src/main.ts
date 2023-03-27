@@ -7,6 +7,19 @@ import { EntityManager } from "./utils/manager"
 
 let debug = true
 let debugText = false
+let paused = false
+
+let pauseBtn = document.getElementsByClassName("pause-button")[0] as HTMLButtonElement
+pauseBtn.addEventListener("click", () => {
+  paused = !paused
+  if (paused) {
+    pauseBtn.innerHTML = "Resume"
+    pauseBtn.classList.replace("btn-secondary", "btn-primary")
+  } else {
+    pauseBtn.innerHTML = "Pause"
+    pauseBtn.classList.replace("btn-primary", "btn-secondary")
+  }
+})
 
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5
@@ -32,15 +45,20 @@ const _app = new p5(p5Instance => {
   // Main loop
   p.draw = function draw() {
     p.background("#212529")
-    // Update
-    entities.update()
-    // Draw
-    entities.draw()
-    // Debug
-    if (debug) {
-      entities.store.forEach(entity => {
-        entity.drawDebug(p, debug, debugText)
-      })
+    if (paused) {
+      entities.updateEditing()
+      entities.draw()
+    } else {
+      // Update
+      entities.update()
+      // Draw
+      entities.draw()
+      // Debug
+      if (debug) {
+        entities.store.forEach(entity => {
+          entity.drawDebug(p, debug, debugText)
+        })
+      }
     }
   }
 

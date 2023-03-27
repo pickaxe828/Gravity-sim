@@ -15,11 +15,10 @@ body,
   background: var(--bs-secondary-bg);
 }
 
-button {
+button, .input-group {
   margin: 0.5rem 0.8rem;
 }
 
 .pause-panel {
   border-top: 2px solid var(--bs-border-color);
-
 }

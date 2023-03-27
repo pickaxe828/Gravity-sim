@@ -9,15 +9,19 @@
   </head>
   <body>
     <div class="app d-flex flex-row">
-      <div class="canva"></div>
-      <div class="panel w-25 d-flex flex-column align-items-end justify-content-start">
-        <div class="config-panel flex-column flex-fill flex-grow-1">
-          <span>lol</span>
+      <div class="canva w-75"></div>
+      <div class="panel d-flex flex-column flex-fill">
+        <div class="control-panel flex-column flex-fill flex-grow-1 w-100">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Mass:</span>
+            <input type="text" class="form-control">
+          </div>
         </div>
-        <div class="pause-panel d-inline-flex">
-          <button class="btn btn-primary">
+        <div class="pause-panel d-inline-flex w-100">
+          <button class="pause-button btn btn-secondary w-100">
             Pause
           </button>
+        </div>
       </div>
     </div>
     <script type="module" src="main.ts"></script>
